@@ -5,6 +5,7 @@ const mongo = require('mongoose')
 // const script = require('./Public/JS/script')
 const RegisterRouter = require('./Routes/RegisterRoute')
 const app = express()
+app.use(express.urlencoded({ extended: true }));
 
 // app.use(express.json());
 

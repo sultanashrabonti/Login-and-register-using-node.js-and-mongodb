@@ -1,3 +1,7 @@
+// const { post } = require("../../Routes/RegisterRoute");
+
+
+
 function show() {
 
     document.getElementById('menu-bar').style.cssText = "left:0%!important;";
@@ -20,25 +24,57 @@ const confirmPass = document.getElementById('confirm')
 
 const register = document.getElementById('register')
 const email = document.getElementById('email')
+
+const emailV = email.value
+const passwordV = pass.value
+const passwordConfirmV = confirmPass.value
 register.addEventListener('click', checkingConfrimPassword)
 
 
 function checkingConfrimPassword() {
 
-
+    if (email.value === '' || pass.value === '') {
+        alert('email or password are missing')
+    }
     if (pass.value != confirmPass.value) {
         alert('the password and confirm password are not same')
-    } else if (pass.value != '' && confirmPass != '' && pass.value === confirmPass.value) {
-        alert('signed in sucessfully now go to login page and log yourself in ')
-
-    } else {
-        alert('empty fields')
     }
+    console.log(email.value, pass.value, confirmPass.value);
+    signIn(email.value, pass.value, confirmPass.value)
+
 }
 
-const obj = {
-    email: email.value,
-    password: pass.value,
-    confirmPassword: confirmPass.value
+
+
+
+async function signIn(email, password, passwordConfirm) {
+    const response = await fetch('/App/Register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            email,
+            password,
+            passwordConfirm
+
+
+        }),
+    })
+    if (!response.ok) {
+        alert('Oops please try again ')
+    }
+    else {
+        alert('sign in sucessful you can login now')
+    }
+    const data = await response.json()
+    console.log(data);
+
+
+
 }
-module.exports = obj
+
+
+
+
+
