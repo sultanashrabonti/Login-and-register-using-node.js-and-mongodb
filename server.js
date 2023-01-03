@@ -19,8 +19,8 @@ mongo
 
 
 
-
-app.use('/Register', RegisterRouter)
+app.use(express.json())
+app.use('/App', RegisterRouter)
 app.use(express.static('./Public'))
 app.listen(2000, () => {
     console.log('yes the server has been started');

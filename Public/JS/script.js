@@ -1,4 +1,3 @@
-
 function show() {
 
     document.getElementById('menu-bar').style.cssText = "left:0%!important;";
@@ -15,6 +14,7 @@ function hide() {
 
 }
 
+
 const pass = document.getElementById('pass')
 const confirmPass = document.getElementById('confirm')
 
@@ -30,8 +30,15 @@ function checkingConfrimPassword() {
         alert('the password and confirm password are not same')
     } else if (pass.value != '' && confirmPass != '' && pass.value === confirmPass.value) {
         alert('signed in sucessfully now go to login page and log yourself in ')
-        module.exports = [email.value, pass.value, confirmPass.value]
+
     } else {
         alert('empty fields')
     }
 }
+
+const obj = {
+    email: email.value,
+    password: pass.value,
+    confirmPassword: confirmPass.value
+}
+module.exports = obj
