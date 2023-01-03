@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(express.json());
 
 mongo
-    .connect('mongodb+srv://tour:tour@tour.xokck8b.mongodb.net/LoginUsers?retryWrites=true&w=majority', {
+    .connect(process.env.LINK, {
 
 
     }).then(con => {
