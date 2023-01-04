@@ -25,9 +25,7 @@ const confirmPass = document.getElementById('confirm')
 const register = document.getElementById('register')
 const email = document.getElementById('email')
 
-const emailV = email.value
-const passwordV = pass.value
-const passwordConfirmV = confirmPass.value
+
 register.addEventListener('click', checkingConfrimPassword)
 
 
@@ -62,7 +60,7 @@ async function signIn(email, password, passwordConfirm) {
         }),
     })
     if (!response.ok) {
-        alert('Oops please try again ')
+        alert('user already exists please login ')
     }
     else {
         alert('sign in sucessful you can login now')
@@ -74,7 +72,4 @@ async function signIn(email, password, passwordConfirm) {
 
 }
 
-
-
-
-
+// Creating login functionality

@@ -1,7 +1,8 @@
 const express = require('express')
 const RegisterController = require('./Controllers/RegisterController')
 const mongo = require('mongoose')
-
+const dotenv = require('dotenv')
+dotenv.config()
 // const script = require('./Public/JS/script')
 const RegisterRouter = require('./Routes/RegisterRoute')
 const app = express()
