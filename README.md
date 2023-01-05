@@ -12,7 +12,7 @@
 Node.js and npm (node package manager) installed on your machine
 
 
-A MongoDB database set up and running
+A MongoDB database set up and running.
 
 ### Installation
 Clone the repository to your local machine.
