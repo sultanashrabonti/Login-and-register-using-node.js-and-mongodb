@@ -1,5 +1,5 @@
-const express = require('express')
 const RegisterController = require('./Controllers/RegisterController')
+const express = require('express')
 const mongo = require('mongoose')
 const dotenv = require('dotenv')
 dotenv.config({ path: './vars/.env' })

@@ -21,24 +21,24 @@ exports.registerUser = catchAsync(async (req, res, next) => {
 })
 
 exports.login = async (req, res, next) => {
-    const user = await Fields.findOne({ email: req.body.email }).select('+password')
-    if (!user) {
-        res.status(500).json({
-            status: 'failed',
-            message: 'user not exists'
-        })
-    }
-    if (req.body.password !== user.password) {
-        res.status(404).json({
-            status: 'failed',
-            mssg: 'Incorrect password or email'
-        })
 
-    } else {
-        res.status(201).json({
-            status: 'sucess',
-            mssg: 'You are logged in '
-        })
+    const { email, password } = req.body
+    if (!email || !password) {
+        return next(new appError('please provide a email and password ', 400))
     }
+    const user = await Fields.findOne({
+        email: email
+    }).select('+password')
+
+    if (!user || ! await user.correctPassword(password, user.password)) {
+        return next(new appError('The email or password is incorrect ', 400))
+    }
+
+
+    res.status(201).json({
+        status: 'sucess',
+        mssg: 'You are logged in '
+    })
+
 
 }
