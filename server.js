@@ -1,31 +1,40 @@
-const RegisterController = require('./Controllers/RegisterController')
-const express = require('express')
-const mongo = require('mongoose')
-const dotenv = require('dotenv')
-dotenv.config({ path: './vars/.env' })
-// const script = require('./Public/JS/script')
-const RegisterRouter = require('./Routes/RegisterRoute')
-const app = express()
+require('dotenv').config();
+const RegisterController = require('./Controllers/RegisterController');
+const express = require('express');
+const mongo = require('mongoose'); // It's conventional to use 'mongoose'
+const dotenv = require('dotenv');
+const RegisterRouter = require('./Routes/RegisterRoute');
+
+dotenv.config({ path: './vars/.env' });
+
+const app = express();
+
+// Middleware to parse URL-encoded bodies
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(express.json());
+// Middleware to parse JSON bodies
+app.use(express.json());
 
+// Serve static files from the Public directory
+app.use(express.static('./Public'));
+
+// Define your API routes
+app.use('/App', RegisterRouter);
+
+// MongoDB Connection
 mongo
-    .connect(process.env.LINK, {
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true, // Recommended for new MongoDB driver versions
+    useUnifiedTopology: true, // Recommended for new MongoDB driver versions
+  })
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((err) => {
+    console.error('Database connection error:', err);
+  });
 
-
-    }).then(con => {
-        // console.log(con.connectaions);
-        console.log('connected with moongoses');
-    })
-
-
-
-app.use(express.json())
-app.use('/App', RegisterRouter)
-app.use(express.static('./Public'))
-app.listen(2000, () => {
-    console.log('yes the server has been started');
-
-
-})
+// Start the server
+app.listen(4000, () => {
+  console.log("Server started on port 4000");
+});
